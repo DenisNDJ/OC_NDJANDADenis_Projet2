@@ -1,0 +1,7 @@
+<h2>Olympic games app</h2>
+<div class="divNav">
+    <h3>Countries:</h3>
+    @for (country of countries; track country.country) {
+    <a class="countryNav" aria-label="CountryNav" (click)="onClick(country.country)">{{country.country}}</a>
+    }
+</div>

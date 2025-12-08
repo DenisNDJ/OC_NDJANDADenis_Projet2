@@ -1,0 +1,19 @@
+.divNav {
+  list-style-type: none;
+  float: none;
+  overflow: hidden;
+}
+
+a {
+    padding: 5px;
+    color: #0e6a58;
+    text-decoration: none;
+    float: left;
+    text-align: center;
+  }
+
+.countryNav{
+    &:hover {
+    text-decoration: underline;
+  }
+}

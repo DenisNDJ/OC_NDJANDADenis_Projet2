@@ -1,0 +1,73 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import Chart from 'chart.js/auto';
+import { take } from 'rxjs';
+import { Country } from 'src/app/models/country';
+import { ApiService } from 'src/app/services/api.service';
+import { DataService } from 'src/app/services/data.service';
+
+@Component({
+  selector: 'app-country-line-chart',
+  standalone: true,
+  imports: [RouterLink],
+  templateUrl: './country-line-chart.component.html',
+  styleUrl: './country-line-chart.component.scss'
+})
+
+export class CountryLineChartComponent implements OnInit{
+  public titlePage!: string;
+  public totalEntries!: number;
+  public totalMedals!: number;
+  public totalAthletes!: number;
+  public error!: string;
+
+  constructor(private route: ActivatedRoute,
+              private apiService: ApiService,
+              private dataService: DataService) {
+  }
+
+  ngOnInit() {
+    this.apiService.setRefreshPage();
+    
+    let countryName:string|null = this.apiService.getSelectedNameCountry(this.route);
+
+    this.apiService.getCountries().pipe(take(1)).subscribe((countryList:Country[])=>{
+      if (countryList && countryList.length > 0 && this.dataService.cntExist(countryList,countryName)){
+        const selectedCountry = this.dataService.getCntByName(countryList, countryName)
+        this.titlePage = selectedCountry.country;
+        this.totalEntries = this.dataService.getNbrParticipations(selectedCountry)
+        this.totalMedals = this.dataService.getMedalsTotal(selectedCountry)
+        this.totalAthletes = this.dataService.getAthletesTotal(selectedCountry)
+        this.buildChart(this.dataService.getJosYears(selectedCountry), this.dataService.getMedalsPerYears(selectedCountry));
+      }
+      else{
+        this.apiService.navToPage('Error')
+      }
+    },
+      (error:HttpErrorResponse) => {
+        this.apiService.navToPage('Error')
+        throw new Error(error.message);
+      }
+    )
+  }
+
+  buildChart(years: number[], medals: string[]) {
+    const lineChart = new Chart("countryChart", {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "medals",
+            data: medals,
+            backgroundColor: '#0b868f'
+          },
+        ]
+      },
+      options: {
+        aspectRatio: 2.5
+      }
+    });
+  }
+}

@@ -1,0 +1,1 @@
+export type NavSelect = 'Home' | 'Country' | 'Error'
