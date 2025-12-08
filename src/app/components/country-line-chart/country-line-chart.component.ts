@@ -16,10 +16,6 @@ import { DataService } from 'src/app/services/data.service';
 })
 
 export class CountryLineChartComponent implements OnInit{
-  public titlePage!: string;
-  public totalEntries!: number;
-  public totalMedals!: number;
-  public totalAthletes!: number;
   public error!: string;
 
   constructor(private route: ActivatedRoute,
@@ -35,10 +31,6 @@ export class CountryLineChartComponent implements OnInit{
     this.apiService.getCountries().pipe(take(1)).subscribe((countryList:Country[])=>{
       if (countryList && countryList.length > 0 && this.dataService.cntExist(countryList,countryName)){
         const selectedCountry = this.dataService.getCntByName(countryList, countryName)
-        this.titlePage = selectedCountry.country;
-        this.totalEntries = this.dataService.getNbrParticipations(selectedCountry)
-        this.totalMedals = this.dataService.getMedalsTotal(selectedCountry)
-        this.totalAthletes = this.dataService.getAthletesTotal(selectedCountry)
         this.buildChart(this.dataService.getJosYears(selectedCountry), this.dataService.getMedalsPerYears(selectedCountry));
       }
       else{
