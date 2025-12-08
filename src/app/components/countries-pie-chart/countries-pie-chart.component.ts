@@ -6,6 +6,7 @@ import { DataService } from 'src/app/services/data.service';
 import { Country } from 'src/app/models/country';
 import { Chart } from 'chart.js';
 import { take } from 'rxjs';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-countries-pie-chart',
@@ -19,18 +20,19 @@ export class CountriesPieChartComponent implements OnInit{
 
   constructor(private router: Router,
               private apiService: ApiService,
-              private dataService: DataService) { }
+              private dataService: DataService,
+              private navService: NavService) { }
   
   ngOnInit() {
     this.apiService.getCountries().pipe(take(1)).subscribe((countryList:Country[])=>{
       if (countryList && countryList.length > 0){
       this.buildPieChart(this.dataService.getCntsName(countryList), this.dataService.getCntsMedals(countryList));
       }else{
-        this.apiService.navToPage('Error')
+        this.navService.navToPage('Error')
       }    
     },
       (error:HttpErrorResponse) => {
-        this.apiService.navToPage('Error')
+        this.navService.navToPage('Error')
         throw new Error(error.message);
       }
     )

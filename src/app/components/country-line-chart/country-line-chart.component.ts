@@ -6,6 +6,7 @@ import { take } from 'rxjs';
 import { Country } from 'src/app/models/country';
 import { ApiService } from 'src/app/services/api.service';
 import { DataService } from 'src/app/services/data.service';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-country-line-chart',
@@ -20,11 +21,12 @@ export class CountryLineChartComponent implements OnInit{
 
   constructor(private route: ActivatedRoute,
               private apiService: ApiService,
-              private dataService: DataService) {
+              private dataService: DataService,
+              private navService: NavService) {
   }
 
   ngOnInit() {
-    this.apiService.setRefreshPage();
+    this.navService.setRefreshPage();
     
     let countryName:string|null = this.apiService.getSelectedNameCountry(this.route);
 
@@ -34,11 +36,11 @@ export class CountryLineChartComponent implements OnInit{
         this.buildChart(this.dataService.getJosYears(selectedCountry), this.dataService.getMedalsPerYears(selectedCountry));
       }
       else{
-        this.apiService.navToPage('Error')
+        this.navService.navToPage('Error')
       }
     },
       (error:HttpErrorResponse) => {
-        this.apiService.navToPage('Error')
+        this.navService.navToPage('Error')
         throw new Error(error.message);
       }
     )

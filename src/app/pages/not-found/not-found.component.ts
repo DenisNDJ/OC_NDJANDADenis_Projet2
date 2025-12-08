@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-not-found',
@@ -8,13 +8,13 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class NotFoundPage implements OnInit {
 
-  constructor(private apiService:ApiService) { }
+  constructor(private navService: NavService) { }
 
     ngOnInit(): void {
       throw new Error('No data');
     }
 
     onClick(){
-    this.apiService.navToPage('Home')
+    this.navService.navToPage('Home')
   }
 }

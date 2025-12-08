@@ -5,6 +5,7 @@ import { DataService } from 'src/app/services/data.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Country } from 'src/app/models/country';
 import { take } from 'rxjs';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -20,7 +21,8 @@ export class DashboardPageComponent implements OnInit{
   titlePage: string = "Medals per Country";
 
   constructor(private apiService: ApiService,
-              private dataService: DataService) { }
+              private dataService: DataService,
+              private navService: NavService) { }
   
   ngOnInit() {
     this.apiService.getCountries().pipe(take(1)).subscribe((countryList:Country[])=>{
@@ -29,11 +31,11 @@ export class DashboardPageComponent implements OnInit{
       this.totalCountries = this.dataService.getCntsNbr(this.dataService.getCntsName(countryList))
       
       }else{
-        this.apiService.navToPage('Error')
+        this.navService.navToPage('Error')
       }    
     },
       (error:HttpErrorResponse) => {
-        this.apiService.navToPage('Error')
+        this.navService.navToPage('Error')
         throw new Error(error.message);
       }
     )
