@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Country } from '../models/country';
-import { ApiService } from './api.service';
 
 @Injectable({
     providedIn: `root`
 })
 
 export class DataService{
-
-
-    constructor(private apiService: ApiService){}
 
     /**
      * Verifies if the country exist

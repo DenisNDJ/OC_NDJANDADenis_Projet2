@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Country } from '../models/country';
 import { Observable } from 'rxjs/internal/Observable';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { NavSelect } from '../models/navigation.type';
 
 @Injectable({
     providedIn: `root`
@@ -13,7 +12,7 @@ export class ApiService{
 
     private olympicUrl = './assets/mock/olympic.json';
 
-    constructor(private router:Router,private http:HttpClient) {}
+    constructor(private http:HttpClient) {}
 
     /**
      * This is the "api" call to get the data from the Json file

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavSelect } from '../models/navigation.type';
@@ -9,7 +8,7 @@ import { NavSelect } from '../models/navigation.type';
 
 export class NavService{
 
-    constructor(private router:Router,private http:HttpClient) {}
+    constructor(private router:Router) {}
 
     /**
      * This function andle the navigation betwenn pages
