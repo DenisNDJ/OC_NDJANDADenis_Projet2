@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CountriesPieChartComponent } from "src/app/components/countries-pie-chart/countries-pie-chart.component";
+import { HttpErrorResponse } from '@angular/common/http';
+import { DataService } from 'src/app/services/data.service';
+import { ApiService } from 'src/app/services/api.service';
+import { Country } from 'src/app/models/country';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -8,6 +13,29 @@ import { CountriesPieChartComponent } from "src/app/components/countries-pie-cha
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.scss'
 })
-export class DashboardPageComponent {
+export class DashboardPageComponent implements OnInit{
+  
+  public totalCountries!: number
+  public totalJOs!: number
+  titlePage: string = "Medals per Country";
 
+  constructor(private apiService: ApiService,
+              private dataService: DataService) { }
+  
+  ngOnInit() {
+    this.apiService.getCountries().pipe(take(1)).subscribe((countryList:Country[])=>{
+      if (countryList && countryList.length > 0){
+      this.totalJOs = this.dataService.getJONbr(countryList);
+      this.totalCountries = this.dataService.getCntsNbr(this.dataService.getCntsName(countryList))
+      
+      }else{
+        this.apiService.navToPage('Error')
+      }    
+    },
+      (error:HttpErrorResponse) => {
+        this.apiService.navToPage('Error')
+        throw new Error(error.message);
+      }
+    )
+  }
 }

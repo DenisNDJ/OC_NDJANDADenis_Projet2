@@ -15,10 +15,7 @@ import { take } from 'rxjs';
 })
 
 export class CountriesPieChartComponent implements OnInit{
-  public totalCountries!: number
-  public totalJOs!: number
   public error!:string
-  titlePage: string = "Medals per Country";
 
   constructor(private router: Router,
               private apiService: ApiService,
@@ -27,8 +24,6 @@ export class CountriesPieChartComponent implements OnInit{
   ngOnInit() {
     this.apiService.getCountries().pipe(take(1)).subscribe((countryList:Country[])=>{
       if (countryList && countryList.length > 0){
-      this.totalJOs = this.dataService.getJONbr(countryList);
-      this.totalCountries = this.dataService.getCntsNbr(this.dataService.getCntsName(countryList))
       this.buildPieChart(this.dataService.getCntsName(countryList), this.dataService.getCntsMedals(countryList));
       }else{
         this.apiService.navToPage('Error')
