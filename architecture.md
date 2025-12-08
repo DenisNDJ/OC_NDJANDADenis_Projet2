@@ -1,5 +1,5 @@
-La nouvelle architecture a était réalisé dans le but d'ameliorer la structure de l'application. Cette amelioration permettra de facilité les modifications et l'ajout de fonctionnalitées sur application.
-Cette architecture rendra isolera des composants pour les rentre réutilisable. Le service ,gérant les donnees, permettra d'utiliser les données de facon globale et sans réecrire des methodes. Le service "api" permettra d'uniquement modifier le service en cas d'evolution de l'api et non dans tous les composants.
+La nouvelle architecture a été réalisée dans le but d'améliorer la structure de l'application. Cette amélioration permettra de faciliter les modifications et l'ajout de fonctionnalités sur l'application.
+Cette architecture isolera des composants pour les rendre réutilisables. Le service, gérant les données, permettra d'utiliser les données de façon globale et sans réécrire des méthodes. Le service "API" permettra d'uniquement modifier le service en cas d'évolution de l'API et non dans tous les composants.
 
 Structure detaillée:
     scr/app/
@@ -23,7 +23,7 @@ Structure detaillée:
 
 Components sera composé de deux composants :
 - CountriesPieChartComponent : gère la création de la pieChart
-- CountriesLineChartComponent : gère la création de la linChart du pays choisit
+- CountriesLineChartComponent : gère la création de la linChart du pays choisi
 - Header : contient le nom du projet et une barre de navigation contenant tous les pays
 
 Pages sera composé de quatre pages utilisées pour le routing: 

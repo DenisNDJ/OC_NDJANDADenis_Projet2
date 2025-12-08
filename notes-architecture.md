@@ -1,10 +1,10 @@
 Le projet est fonctionnel, mais il présente de nombreux défauts qui rendront difficile son évolution et l’ajout de nouvelles fonctionnalités.
-Le projet posséde une mauvaise structure. Les pages font trop. Il faudra créer des services et des composants pour aleger les pages. Cette separation permettra de facilité l'amelioration ou l'ajout de fonctionnalités dans l'application. Cela nous permettra aussi de réutiliser certains composants.
-On voit notament que les pages, CountryComponent et HomeComponent, réalise les requêtes http pour obtenir la liste des pays. Cette désentralisation ,des requettes http, signifie de recreer un requette pour tous les nouveaux composants.
-De plus, les pages gérent les données. En centralisent cette gestion dans un service, les nouveaux composants n'auront pas à recreer cette gestion. On evite donc les doublons et on augmente la réutilisabilité.
-On peut voir que le code utilise des typages any. L'un des intérets du typsript est le typage strict, l'utilisation de any pose donc un probleme. On utilisera des interfaces pour typer correctement les données du fichier JSON.
-On peut voir qu'il reste aussi des logs à supprimer. Utile durant le développement, il ne faut oublier de les supprimer.
-Enfin, les requettes "http" utilise des observables mais on ne se desabonne pas de ceux la. Sans Desabonnement, on peut avoir des fuites de memoires et les observables peuvent "survivre" à leur page.
+Le projet possède une mauvaise structure. Les pages font trop. Il faudra créer des services et des composants pour alléger les pages. Cette séparation permettra de faciliter l'amélioration ou l'ajout de fonctionnalités dans l'application. Cela nous permettra aussi de réutiliser certains composants.
+On voit notamment que les pages, CountryComponent et HomeComponent, réalisent les requêtes http pour obtenir la liste des pays. Cette décentralisation ,des requêtes http, signifie de créer une requête pour tous les nouveaux composants.
+De plus, les pages gèrent les données. En centralisant cette gestion dans un service, les nouveaux composants n'auront pas à recréer cette gestion. On évite donc les doublons et on augmente la réutilisabilité.
+On peut voir que le code utilise des typages any. L'un des intérêts du typsript est le typage strict, l'utilisation de any pose donc un problème. On utilisera des interfaces pour typer correctement les données du fichier JSON.
+On peut voir qu'il reste aussi des logs à supprimer. Utile durant le développement, il ne faut pas oublier de les supprimer.
+Enfin, les requêtes "http" utilisent des observables mais on ne se désabonne pas de ceux-la. Sans désabonnement, on peut avoir des fuites de mémoire et les observables peuvent "survivre" à leur page.
 
 Problèmes :
 - Pas de typage strict avec l’utilisation d’any
