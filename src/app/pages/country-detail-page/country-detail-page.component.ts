@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { CountryLineChartComponent } from "src/app/components/country-line-chart/country-line-chart.component";
 import { Country } from 'src/app/models/country';
@@ -11,7 +11,7 @@ import { NavService } from 'src/app/services/nav.service';
 @Component({
   selector: 'app-country-detail-page',
   standalone: true,
-  imports: [CountryLineChartComponent],
+  imports: [CountryLineChartComponent,RouterLink],
   templateUrl: './country-detail-page.component.html',
   styleUrl: './country-detail-page.component.scss'
 })

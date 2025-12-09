@@ -11,7 +11,7 @@ import { NavService } from 'src/app/services/nav.service';
 @Component({
   selector: 'app-country-line-chart',
   standalone: true,
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './country-line-chart.component.html',
   styleUrl: './country-line-chart.component.scss'
 })
